@@ -17,8 +17,10 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('cleaner', 'Clean files.', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      punctuation: '.',
-      separator: ', '
+      tab: "\t",
+      space: " ",
+      invisible: "",
+      line: "\n"
     });
 
     // Iterate over all specified file groups.
@@ -38,7 +40,7 @@ module.exports = function(grunt) {
       }).join(grunt.util.normalizelf(options.separator));
 
       // Handle options.
-      src = cleaner(src);
+      src = cleaner(src, options);
 
       // Write the destination file.
       grunt.file.write(f.dest, src);
